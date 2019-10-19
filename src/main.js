@@ -1,31 +1,47 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './App.vue'
+import { store } from './vuex'
+import VueRoutes from './routes'
 import VueRouter from 'vue-router'
-import * as firebase from 'firebase'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-
+import CKEditor from '@ckeditor/ckeditor5-vue'
 
 Vue.use(Vuex)
+Vue.use(CKEditor)
 Vue.use(VueRouter)
-Vue.use(BootstrapVue)
+Vue.use(BootstrapVue) 
 Vue.config.productionTip = false
 
-const config = {
-  apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
-  authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.VUE_APP_FIREBASE_DATASE_URL,
-  projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGE_SENDER_ID
-}
-firebase.initializeApp(config)
+const router = new VueRouter({
+  mode: 'history',
+  routes: VueRoutes,
+  linkExactActiveClass: 'active'
+})
 
 new Vue({
   data: {
-    title: 'CarefordCorp'
+    title: 'Careford'
   },
+  created() {
+    this.$store.dispatch('load_products')
+    this.$store.dispatch('load_categories')
+    this.$store.dispatch('check_authentication')
+  },
+  computed: {
+    state() {
+      return this.$store.getters.state
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
+      this.$router.push({ name: 'home' })
+    }
+  },
+  store,
+  router,
   render: h => h(App),
 }).$mount('#app')

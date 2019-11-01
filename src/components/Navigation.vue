@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="info" fixed="top">
-      <b-navbar-brand :to="{name: 'home'}">{{ $root.title }}</b-navbar-brand>
+      <router-link :to="{name: 'home'}"><b-navbar-brand>{{ $root.title }}</b-navbar-brand></router-link>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -15,18 +15,18 @@
             left
           >
             <div v-if="category.children.includes(',')">
-              <b-dropdown-item v-for="(subcat) in category.children.split(',')" :key="subcat.id">
-                <router-link :to="{name: 'category', params: {id: subcat}}"> {{ getCategoryById(subcat) }}</router-link>
+              <b-dropdown-item v-for="(subcat) in category.children.split(',')" :key="subcat.id" :to="{name: 'category', params: {id: subcat}}">
+                {{ getCategoryById(subcat) }}
               </b-dropdown-item>
             </div>
             <div v-else>
-              <b-dropdown-item>
-                <router-link :to="{name: 'category', params: {id: category.children}}"> {{ getCategoryById(category.children) }}</router-link>
+              <b-dropdown-item :to="{name: 'category', params: {id: category.children}}">
+                {{ getCategoryById(category.children) }}
               </b-dropdown-item>
             </div>
             <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item>
-              <router-link :to="{name: 'category', params: {id: category.id}}"> {{ category.title }}</router-link>
+            <b-dropdown-item :to="{name: 'category', params: {id: category.id}}">
+              {{ category.title }}
             </b-dropdown-item>
           </b-nav-item-dropdown>
 

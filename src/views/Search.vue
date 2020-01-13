@@ -1,6 +1,8 @@
 <template>
     <b-container class="mt-4 mb-4">
+        <vue-headful :title="pageTitle()" description=""></vue-headful>
         <br><br><br>
+
         <b-row v-if="category_results && category_results.length">
             <b-col cols="12">
                 <h3>Results in Categories</h3>
@@ -55,6 +57,9 @@ export default {
                 return cat.id == id
             })
             return a ? a.title : ''
+        },
+        pageTitle() {
+            return "Search Results for " + this.$route.query.data + this.$root.pageTitle()
         }
     }
 }

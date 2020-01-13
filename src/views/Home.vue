@@ -1,5 +1,6 @@
 <template>
     <div>
+        <vue-headful :title="pageTitle()" :description="pageDescription()"></vue-headful>
         <b-container v-if="$root.state" class="text-center">
             <br><br><br><br>
             <b-spinner variant="primary" label="Spinning"></b-spinner><br>
@@ -34,6 +35,15 @@ export default {
         products() {
             return this.$store.getters.products
         }
+    },
+    methods: {
+        pageTitle() {
+            return "Home" + this.$root.pageTitle()
+        },
+        pageDescription() {
+            return this.$root.pageDescription()
+        }
+
     }
 }
 </script>

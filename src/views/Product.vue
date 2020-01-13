@@ -1,5 +1,6 @@
 <template>
   <div class="image-container" v-if="product">
+    <vue-headful :title="pageTitle()" :description="pageDescription()"></vue-headful>
     <b-carousel v-if="product.images"
       id="carousel-1"
       v-model="slide"
@@ -58,7 +59,9 @@
         sliding: null
       }
     },
-    
+    beforeMount() {
+      this.setTitle()
+    },
     methods: {
       onSlideStart(slide) {
         this.sliding = true
@@ -75,6 +78,12 @@
           return category.id == id
         })
         return a ? a.title : 'Uncategorized'
+      },
+      pageTitle() {
+        return this.product.title + " - " + this.product.category + " - " + "Products" + this.$root.pageTitle()
+      },
+      pageDescription() {
+        return "View Products in " + this.product.description
       }
     },
     computed: {
@@ -89,8 +98,6 @@
       },
       
     },
-    created() {
-    }
   }
 </script>
 

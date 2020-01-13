@@ -1,5 +1,6 @@
 <template>
     <b-container class="mt-4 mb-4" v-if="category">
+        <vue-headful :title="pageTitle()" :description="pageDescription()"></vue-headful>
         <br><br><br>
         <b-row v-if="category.children && category.children.length">
             <b-col cols="12">
@@ -65,10 +66,18 @@ export default {
                 return cat.id == id
             })
             return a ? a.title : ''
+        },
+        pageTitle() {
+            return this.category.title + " - Categories" + this.$root.pageTitle()
+        },
+        pageDescription() {
+            return "View Products in " + this.category.title + "."
         }
     },
-    mounted() {
-        console.log(this.category, this.products)
-    }
+    // beforeMount() {
+    //     this.setTitle()
+    // },
+    
+    
 }
 </script>

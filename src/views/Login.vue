@@ -1,5 +1,6 @@
 <template>
     <b-container class="mt-4">
+        <vue-headful :title="pageTitle()" description=""></vue-headful>
         <br><br><br>
         <h1 class="text-center">Admin Area</h1>
         <b-form @submit.prevent="onSubmit" class="pt-4">
@@ -52,6 +53,9 @@ export default {
                 this.error = error.message
             })
             
+        },
+        pageTitle() {
+            return "Admin Login" + this.$root.pageTitle()
         }
     }
 }

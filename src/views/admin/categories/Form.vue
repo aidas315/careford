@@ -1,8 +1,12 @@
 <template>
     <b-container>
         <br><br><br>
-        <b-card :header="form_type == 'new' ? 'Add Category' : 'Edit Category'" header-tag="header">
-            <div>
+        <b-card no-body>
+                <template v-slot:header>
+                    <p class="mb-0" style="float: left">{{form_type == 'new' ? 'Add Category' : 'Edit Category'}}</p>
+                    <b-link :to="{name: 'view_categories'}" style="float: right">View Categories   </b-link>
+                </template>
+            <b-card-body>
                 <b-form @submit.prevent="handleForm">
                     <b-form-group
                         id="title-input-group"
@@ -36,7 +40,7 @@
                     </b-button>
 
                 </b-form>
-            </div>
+            </b-card-body>
         </b-card>
     </b-container>
 </template>

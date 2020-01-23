@@ -1,8 +1,13 @@
 <template>
     <b-container>
         <br><br><br>
-        <b-card :header="form_type == 'new' ? 'Add Product' : 'Edit Product'" header-tag="header">
-            <div>
+        <b-card no-body>
+            <template v-slot:header>
+                <p class="mb-0" style="float: left">{{ form_type == 'new' ? 'Add Product' : 'Edit Product' }}</p>
+                <b-link :to="{name: 'view_products'}" style="float: right">View Products   </b-link>
+            </template>
+
+            <b-card-body>
                 <b-form @submit.prevent="handleForm">
                     <b-form-group
                         id="title-input-group"
@@ -67,7 +72,7 @@
                     </b-button>
 
                 </b-form>
-            </div>
+            </b-card-body>
         </b-card>
     </b-container>
 </template>

@@ -12,30 +12,22 @@
       style="text-shadow: 1px 1px 2px #333; text-align: left"
       @sliding-start="onSlideStart"
       @sliding-end="onSlideEnd" 
-      v-if="featured_products"
+      v-if="banners"
     >
-      <div v-for="(product, index) in featured_products" :key="index">
-        <router-link :to="{name: 'product', params: {id: product.id}}">
-          <div v-if="product.images.includes(',')">
-          
-            <b-carousel-slide
-              :text="cleanIt(product.description).slice(0, 100)"
-              :caption="product.title"
-              :img-src="product.images.split(',').pop()"
-            >
+      <div v-for="(banner, index) in banners" :key="index">
+        <a :href="banner.link" target="_blank" title="See More">
+          <div style="height: 400px; position: relative;">
+            <b-carousel-slide 
+              :text="cleanIt(banner.description).slice(0, 100)"
+              style="margin-bottom: 40px"
+              :caption="banner.title"
+              :img-src="banner.image"
               
-            </b-carousel-slide>
-          </div>
-          <div v-else>
-            <b-carousel-slide
-              :text="cleanIt(product.description).slice(0, 100)"
-              
-              :caption="product.title"
-              :img-src="product.images"
             >
             </b-carousel-slide>
+            
           </div>
-        </router-link>
+        </a>
       </div>
     </b-carousel> 
   </div>
@@ -50,8 +42,8 @@
       }
     },
     computed: {
-      featured_products() {
-        return this.$store.getters.featured_products
+      banners() {
+        return this.$store.getters.banners
       }
     },
     methods: {
@@ -62,6 +54,7 @@
         this.sliding = false
       },
       cleanIt(strInputCode) {
+        if (!strInputCode) return ""
         return strInputCode.replace(/<\/?[^>]+(>|$)/g, "")
       }
     }

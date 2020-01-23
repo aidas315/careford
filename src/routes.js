@@ -6,16 +6,23 @@ const Product = () => import('./views/Product')
 const Category = () => import('./views/Category')
 const Dashboard = () => import('./views/admin/Dashboard')
 const AdminHandler = () => import('./views/admin/Handler')
+const BannerForm = () => import('./views/admin/banners/Form')
+const BannerView = () => import('./views/admin/banners/View')
 const ProductForm = () => import('./views/admin/products/Form')
 const ViewProducts = () => import('./views/admin/products/View')
 const CategoryForm = () => import('./views/admin/categories/Form')
 const ViewCategories = () => import('./views/admin/categories/View')
 
-const authGaurd = (to, from, next) => {
-    if (store.getters.authenticated) {
+function isAutenticated() {
+    return store.getters.authenticated;
+}
+
+const authGaurd = async (to, from, next) => {
+    if (await isAutenticated()) {
         next()
-    } 
-    next({ name: 'home' })
+    } else {
+        next({ name: 'home' })
+    }
 }
 
 export default [
@@ -63,6 +70,21 @@ export default [
                 path: 'view-products',
                 name: 'view_products',
                 component: ViewProducts,
+            },
+            {
+                path: 'add-banner',
+                name: 'add_banner',
+                component: BannerForm,
+            },
+            // {
+            //     path: 'edit-banner/:id',
+            //     name: 'edit_banner',
+            //     component: BannerForm
+            // },
+            {
+                path: 'view-banners',
+                name: 'view_banners',
+                component: BannerView,
             },
             {
                 path: 'add-category',

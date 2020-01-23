@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from './auth'
+import banner from './banner'
 import product from './product'
 import category from './category'
 
@@ -22,6 +23,7 @@ export const store = new Vuex.Store({
     },
     modules: {
         auth,
+        banner,
         product,
         category
     }

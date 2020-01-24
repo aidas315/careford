@@ -1,52 +1,64 @@
 <template>
   <div class="image-container" v-if="product">
     <vue-headful :title="pageTitle()" :description="pageDescription()"></vue-headful>
-    <b-carousel v-if="product.images"
-      id="carousel-1"
-      v-model="slide"
-      :interval="4000"
-      controls
-      indicators
-      background="#ababab"
-      img-height="300"
-      style="text-shadow: 1px 1px 2px #333;"
-      @sliding-start="onSlideStart"
-      @sliding-end="onSlideEnd"
-    >
-      <div v-if="product.images.includes(',')">
-        <div v-for="(image, index) in product.images.split(',')" :key="index">
-          <div v-if="image">
-            <b-carousel-slide
-              
-              :caption="product.title"
-              :img-src="image"
+    <b-container style="margin-top: 100px;">
+      <b-row style="margin-bottom: 20px;">
+        <b-col cols="12" style="text-align: center">
+          <h3> {{ product.title }}</h3>
+          <h6>@<router-link :to="{name: 'category', params: {id: product.category}}">{{ getCategoryById(product.category) }}</router-link></h6>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col cols="6">
+          <b-carousel v-if="product.images"
+            id="carousel-1"
+            v-model="slide"
+            :interval="4000"
+            controls
+            indicators
+            background="#ababab"
+            img-height="300"
+            style="text-shadow: 1px 1px 2px #333;"
+            @sliding-start="onSlideStart"
+            @sliding-end="onSlideEnd"
             >
-              <div v-if="authenticated">
-                <a href="#" @click.prevent="removeProductImage($event, {id: product.id, imageURI: image})">Remove this Image</a>
+            <div v-if="product.images.includes(',')">
+              <div v-for="(image, index) in product.images.split(',')" :key="index">
+                <div v-if="image">
+                  <b-carousel-slide
+                    
+                    :caption="product.title"
+                    :img-src="image"
+                  >
+                    <div v-if="authenticated">
+                      <a href="#" @click.prevent="removeProductImage($event, {id: product.id, imageURI: image})">Remove this Image</a>
+                    </div>
+                  </b-carousel-slide>
+                </div>
               </div>
-            </b-carousel-slide>
-          </div>
-        </div>
-    </div>
-    <div v-else>
-      <b-carousel-slide
-        
-        
-        :caption="product.title"
-        :img-src="product.images"
-      >
-        <div v-if="authenticated">
-          <a href="#" @click.prevent="removeProductImage($event, {id: product.id, imageURI: product.images})">Remove this Image</a>
-        </div>
-      </b-carousel-slide>
-    </div>
-    </b-carousel>
-    <br><br><br>
-    <b-container>
-      <h3> {{ product.title }}</h3>
-      <h6>@<router-link :to="{name: 'category', params: {id: product.category}}">{{ getCategoryById(product.category) }}</router-link></h6>
-      <br>
-      <div v-html="product.description"></div>
+            </div>
+            <div v-else>
+              <b-carousel-slide
+                
+                
+                :caption="product.title"
+                :img-src="product.images"
+              >
+                <div v-if="authenticated">
+                  <a href="#" @click.prevent="removeProductImage($event, {id: product.id, imageURI: product.images})">Remove this Image</a>
+                </div>
+              </b-carousel-slide>
+            </div>
+          </b-carousel>
+          <!-- <br><br><br> -->
+        </b-col>
+        <b-col cols="6">
+          <b-container>
+            <p><b>Details</b></p>
+            <div v-html="product.description"></div>
+          </b-container>
+        </b-col>
+      </b-row>
     </b-container>
   </div>
 </template>
@@ -58,9 +70,6 @@
         slide: 0,
         sliding: null
       }
-    },
-    beforeMount() {
-      this.setTitle()
     },
     methods: {
       onSlideStart(slide) {

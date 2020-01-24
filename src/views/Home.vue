@@ -9,7 +9,16 @@
         <div v-else>
             <Carousel />
             <br><br>
-            <b-container>
+            <b-container v-if="featured_products" :style="$store.getters.banners.length == 0 ? 'margin-top: 50px' : ''">
+                <h3>Featured Products</h3>
+                <b-row class="mt-4 mb-4">
+                    <b-col cols="4" v-for="(product, index) in products.slice(0, 9)" :key="index">
+                        <Product :product="product" />
+                    </b-col>
+                </b-row>
+            </b-container>
+            <!-- <br><br> -->
+            <b-container v-if="products" :style="$store.getters.banners.length == 0 ? 'margin-top: 50px' : ''">
                 <h3>Latest Products</h3>
                 <b-row class="mt-4 mb-4">
                     <b-col cols="4" v-for="(product, index) in products.slice(0, 9)" :key="index">
@@ -34,6 +43,9 @@ export default {
     computed: {
         products() {
             return this.$store.getters.products
+        },
+        featured_products() {
+            return this.$store.getters.featured_products
         }
     },
     methods: {

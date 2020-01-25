@@ -9,6 +9,17 @@
         <div v-else>
             <Carousel />
             <br><br>
+            <b-container>
+                <h3>Categories</h3>
+                <p>
+                    <b-badge variant="light" v-for="(subcat, index) in categories" :key="index">
+                        <router-link :to="{name: 'category', params: {id: subcat.id}}">
+                            {{ subcat.title }}
+                        </router-link>
+                    </b-badge>
+                </p>
+            </b-container>
+            <br>
             <b-container v-if="featured_products" :style="$store.getters.banners.length == 0 ? 'margin-top: 50px' : ''">
                 <h3>Featured Products</h3>
                 <b-row class="mt-4 mb-4">
@@ -46,7 +57,10 @@ export default {
         },
         featured_products() {
             return this.$store.getters.featured_products
-        }
+        },
+        categories() {
+            return this.$store.getters.categories
+        },
     },
     methods: {
         pageTitle() {

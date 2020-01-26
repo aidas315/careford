@@ -3,12 +3,13 @@
     <footer class="site-footer">
       <div class="container">
         <div class="row">
-          <div class="col-sm-12 col-md-6">
+          
+          <div class="col-sm-12 col-md-7">
             <h6>About</h6>
             <p class="text-justify">{{ $root.pageDescription() }}</p>
           </div>
 
-          <div class="col-xs-6 col-md-3 contact">
+          <div class="col-xs-12 col-md-5 contact">
             <h6>Contact</h6>
             <!-- <ul class="footer-links" v-for="(category) in categories_with_child" :key="category.id">
                 <li><b-link :to="{name: 'category', params: {id: category.id}}">{{ category.title }}</b-link></li>
@@ -40,7 +41,7 @@
           </div>
 
 
-          <div class="col-xs-6 col-md-3">
+          <!-- <div class="col-xs-6 col-md-3">
             <h6>Quick Links</h6>
             <ul class="footer-links">
               <li><a href="http://scanfcode.com/about/">About Us</a></li>
@@ -49,7 +50,8 @@
               <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
               <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
             </ul>
-          </div>
+          </div> -->
+          
         </div>
         <hr>
       </div>

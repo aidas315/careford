@@ -47,16 +47,29 @@ export default {
         delete_banner({ commit }, payload) {
             return new Promise((resolve, reject) => {
                 commit('set_loading', true)
-                db.child(payload).remove()
-                    .then(res => {
-                        commit('remove_banner', payload)
-                        commit('set_loading', true)
-                        resolve(res)
+                db.child(payload).once('value')
+                    .then(snapshot => {
+                        let bannerData = snapshot.val()
+                        if (bannerData && bannerData.image) {
+                            
+                                storage.refFromURL(bannerData.image).delete()
+                                    .then(_ => console.log('image removed'))
+                                    .catch(_ => console.log('error while removing image'))
+                            
+                        }
+
+                        db.child(payload).remove()
+                            .then(res => {
+                                commit('remove_banner', payload)
+                                commit('set_loading', true)
+                                resolve(res)
+                            })
+                            .catch(err => {
+                                commit('set_loading', true)
+                                reject(err)
+                            })
                     })
-                    .catch(err => {
-                        commit('set_loading', true)
-                        reject(err)
-                    })
+                
             })
         },
         create_banner({ commit }, payload) {

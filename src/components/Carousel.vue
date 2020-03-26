@@ -1,13 +1,12 @@
 <template>
   <div>
     <b-carousel
-      id="carousel-1"
+      id="carousel-0"
       v-model="slide"
       :interval="4000"
       controls
       fade
       indicators
-      img-height="550"
       background="#ababab"
       style="text-shadow: 1px 1px 2px #333; text-align: left"
       @sliding-start="onSlideStart"
@@ -15,19 +14,17 @@
       v-if="banners"
     >
       <div v-for="(banner, index) in banners" :key="index">
-        <a :href="banner.link" target="_blank" title="See More">
-          <div style="height: 400px; position: relative;">
+        
             <b-carousel-slide 
-              :text="cleanIt(banner.description).slice(0, 100)"
-              style="margin-bottom: 40px"
-              :caption="banner.title"
-              :img-src="banner.image"
-              
+                
+                
+                
+                :img-src="banner.image"
+                
             >
             </b-carousel-slide>
             
-          </div>
-        </a>
+        
       </div>
     </b-carousel> 
   </div>
@@ -61,8 +58,10 @@
   }
 </script>
 
-<style scoped>
-.carousel-item {
-    max-height: 500px;
+<style>
+#carousel-0 
+.img-fluid.w-100 {
+    height: 100vh;
+    width: max-content !important;
 }
 </style>

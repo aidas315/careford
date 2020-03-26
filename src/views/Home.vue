@@ -1,35 +1,46 @@
 <template>
     <div>
         <vue-headful :title="pageTitle()" :description="pageDescription()"></vue-headful>
-        <b-container v-if="$root.state" class="text-center">
-            <br><br><br><br>
-            <b-spinner variant="primary" label="Spinning"></b-spinner><br>
-            <strong>Loading...</strong>
-        </b-container>
-        <div v-else>
+        
+        <div>
             <Carousel />
             <br><br>
-            <b-container>
+            <b-container v-if="categories && categories.length > 0" class="mb-4">
                 <h3>Categories</h3>
-                <p>
+                <!-- <p>
                     <b-badge variant="light" v-for="(subcat, index) in categories" :key="index">
                         <router-link :to="{name: 'category', params: {id: subcat.id}}">
                             {{ subcat.title }}
                         </router-link>
                     </b-badge>
-                </p>
+                </p> -->
+                
+                <b-row class="mt-4 mb-4 categories">
+                    <b-col cols="3" v-for="(subcat, index) in categories.slice(0, 4)" :key="index">
+                        <b-card :img-src="subcat.images" :img-alt="subcat.title" img-top>
+                            <b-card-text style="text-align: center">
+                                
+                                <router-link :to="{name: 'category', params: {id: subcat.id}}">
+                                    <b-card-sub-title>
+                                        {{ subcat.title }}
+                                    </b-card-sub-title>
+                                </router-link>
+                            </b-card-text>
+                        </b-card>
+                    </b-col>
+                </b-row>
             </b-container>
             <br>
-            <b-container v-if="featured_products" :style="$store.getters.banners.length == 0 ? 'margin-top: 50px' : ''">
+            <b-container v-if="featured_products && featured_products.length > 0" :style="$store.getters.banners.length == 0 ? 'margin-top: 50px' : ''">
                 <h3>Featured Products</h3>
                 <b-row class="mt-4 mb-4">
-                    <b-col cols="4" v-for="(product, index) in products.slice(0, 9)" :key="index">
+                    <b-col cols="4" v-for="(product, index) in featured_products.slice(0, 9)" :key="index">
                         <Product :product="product" />
                     </b-col>
                 </b-row>
             </b-container>
             <!-- <br><br> -->
-            <b-container v-if="products" :style="$store.getters.banners.length == 0 ? 'margin-top: 50px' : ''">
+            <b-container v-if="products && products.length > 0" :style="$store.getters.banners.length == 0 ? 'margin-top: 50px' : ''">
                 <h3>Latest Products</h3>
                 <b-row class="mt-4 mb-4">
                     <b-col cols="4" v-for="(product, index) in products.slice(0, 9)" :key="index">
@@ -73,3 +84,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.categories .card-img-top {
+    height: 150px;
+}
+</style>

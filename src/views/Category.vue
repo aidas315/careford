@@ -1,45 +1,48 @@
 <template>
-    <b-container class="mt-4 mb-4" v-if="category">
+    <div>
         <vue-headful :title="pageTitle()" :description="pageDescription()"></vue-headful>
-        <br><br><br>
-        <b-row v-if="category.children && category.children.length">
-            <b-col cols="12">
-                <h3>Categories in @{{ category.title }}</h3>
-                <p v-if="category.children.includes(',')">
-                    
-                        <b-badge variant="light" v-for="(subcat, index) in category.children.split(',')" :key="index">
-                            <router-link :to="{name: 'category', params: {id: subcat}}">
-                                {{ getCategoryById(subcat) }}
+        <div v-if="category.images" class="image-bg" :style="`background-image: url('${category.images}')`"></div>
+        
+        <b-container class="mt-4 mb-4" v-if="category">
+            <b-row v-if="category.children && category.children.length">
+                <b-col cols="12">
+                    <h3>Categories in @{{ category.title }}</h3>
+                    <p v-if="category.children.includes(',')">
+                        
+                            <b-badge variant="light" v-for="(subcat, index) in category.children.split(',')" :key="index">
+                                <router-link :to="{name: 'category', params: {id: subcat}}">
+                                    {{ getCategoryById(subcat) }}
+                                </router-link>
+                            </b-badge>
+                    </p>
+                    <p v-if="!category.children.includes(',')">
+                        <b-badge variant="light" v-if="getCategoryById(category.children)">
+                            <router-link :to="{name: 'category', params: {id: category.children}}">
+                                {{ getCategoryById(category.children) }}
                             </router-link>
                         </b-badge>
-                </p>
-                <p v-if="!category.children.includes(',')">
-                    <b-badge variant="light" v-if="getCategoryById(category.children)">
-                        <router-link :to="{name: 'category', params: {id: category.children}}">
-                            {{ getCategoryById(category.children) }}
-                        </router-link>
-                    </b-badge>
-                </p>
-            </b-col>
-        </b-row>
-        
-        <hr v-if="category.children && category.children.length && products && products.length">
-        <br>
-
-        <div v-if="products && products.length">
-            <h3>Products in @{{ category.title }}</h3>
-            <b-row class="mt-4 mb-4">
-                <b-col cols="4" v-for="(product, index) in products.slice(0, 9)" :key="index">
-                    <Product :product="product" />
+                    </p>
                 </b-col>
             </b-row>
-        </div>   
+            
+            <hr v-if="category.children && category.children.length && products && products.length">
+            <br>
 
-        <div v-if="!products.length > 0 && !category.children">
-            <h3>Sorry, Nothing was found in {{ category.title }}!</h3>
-        </div>
+            <div v-if="products && products.length">
+                <h3>Products in @{{ category.title }}</h3>
+                <b-row class="mt-4 mb-4">
+                    <b-col cols="4" v-for="(product, index) in products.slice(0, 9)" :key="index">
+                        <Product :product="product" />
+                    </b-col>
+                </b-row>
+            </div>   
 
-    </b-container>
+            <div v-if="!products.length > 0 && !category.children">
+                <h3>Sorry, Nothing was found in {{ category.title }}!</h3>
+            </div>
+
+        </b-container>
+    </div>
 </template>
 
 <script>
@@ -81,3 +84,13 @@ export default {
     
 }
 </script>
+
+<style>
+.image-bg {
+    width: 100%;
+    height: 350px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+</style>

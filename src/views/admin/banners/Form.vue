@@ -33,7 +33,7 @@
                             id="link-input"
                             v-model="link"
                             type="text"
-                            required
+                            
                             placeholder="Blade"
                             ></b-form-input>
                     </b-form-group>

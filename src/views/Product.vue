@@ -27,12 +27,19 @@
                 <div v-if="image">
                   <b-carousel-slide
                     
-                    :caption="product.title"
                     :img-src="image"
                   >
-                    <div v-if="authenticated">
+                    <!-- <div v-if="authenticated">
                       <a href="#" @click.prevent="removeProductImage($event, {id: product.id, imageURI: image})">Remove this Image</a>
+                    </div> -->
+                    <div class="actions">
+                    <div class="wrapper">
+                        <div class="btns">
+                            <a class="button is-rounded" :href="image" target="_blank"><i class="fas fa-eye"></i> View</a>
+                            
+                        </div>    
                     </div>
+                </div>
                   </b-carousel-slide>
                 </div>
               </div>
@@ -41,11 +48,19 @@
               <b-carousel-slide
                 
                 
-                :caption="product.title"
+                
                 :img-src="product.images"
               >
-                <div v-if="authenticated">
+                <!-- <div v-if="authenticated">
                   <a href="#" @click.prevent="removeProductImage($event, {id: product.id, imageURI: product.images})">Remove this Image</a>
+                </div> -->
+                <div class="actions">
+                    <div class="wrapper">
+                        <div class="btns">
+                            <a class="button is-rounded" :href="product.images" target="_blank"><i class="fas fa-eye"></i> View</a>
+                            
+                        </div>    
+                    </div>
                 </div>
               </b-carousel-slide>
             </div>
@@ -110,9 +125,59 @@
   }
 </script>
 
-<style scoped>
-.carousel-item {
+<style>
+#carousel-1 {
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+}
+#carousel-1 .carousel-item {
   min-height: 400px;
     max-height: 400px;
+}
+ .actions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+ .actions .wrapper {
+    height: 100%;
+    width: 100%;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    position: relative;
+}
+
+ .actions .wrapper .btns {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: right;
+    margin: 0 10px;
+}
+
+ .actions .wrapper .button {
+    display: inline-block;
+    margin: 5px 5px;
+}
+
+ .actions .wrapper .button * {
+    display: inline-block;
+    margin: 0 1px;
+}
+
+.actions {
+    display: block;
+    transition: all 320ms;
+}
+.carousel-caption {
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 </style>

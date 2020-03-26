@@ -84,16 +84,29 @@ export default {
         delete_product({ commit }, payload) {
             return new Promise((resolve, reject) => {
                 commit('set_loading', true)
-                db.child(payload).remove()
-                    .then(_ => {
-                        commit('remove_product', payload)
-                        commit('set_loading', false)
-                        resolve(true)
-                    }).catch(error => {
-                        commit('set_loading', false)
-                        console.log('Unexpected error in delete_product: ' + error)
-                        reject(error)
-                    })
+                db.child(payload).once('value')
+                .then(snapshot => {
+                    let productData = snapshot.val()
+                    if (productData && productData.images) {
+                        let productImages = productData.images.split(',')
+                        productImages.forEach((theImg, key) => {
+                            storage.refFromURL(theImg).delete()
+                                .then(_ => console.log('image removed'))
+                                .catch(_ => console.log('error while removing image'))
+                        })
+                    }
+                    db.child(payload).remove()
+                        .then(_ => {
+                            commit('remove_product', payload)
+                            commit('set_loading', false)
+                            resolve(true)
+                        }).catch(error => {
+                            commit('set_loading', false)
+                            console.log('Unexpected error in delete_product: ' + error)
+                            reject(error)
+                        })
+                })
+                
             })
         },
         update_product({ commit }, payload) {
@@ -172,6 +185,9 @@ export default {
                     .then(snapshot => {
                         let product = snapshot.val()
                         if (product) {
+
+                            
+
                             let images = product.images.split(',')
                             images = images.filter(image => {
                                 return image != payload.imageURI || image.trim() != ''
@@ -182,6 +198,9 @@ export default {
                                 .then(_ => {
                                     commit('update_product', { ...product, id: payload.id })
                                     commit('set_loading', false)
+                                    storage.refFromURL(payload.imageURI).delete()
+                                        .then(_ => console.log('image removed'))
+                                        .catch(_ => console.log('error while removing image'))
                                     resolve(true)
                                 }).catch(error => {
                                     console.log('Unexpected error in update product: ' + error)

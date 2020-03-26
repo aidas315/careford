@@ -1,7 +1,14 @@
 <template>
   <div>
     <Navigation />
-    <router-view></router-view>
+    <b-container v-if="$root.state" class="text-center">
+            <br><br><br><br>
+            <b-spinner variant="primary" label="Spinning"></b-spinner><br>
+            <strong>Loading...</strong>
+    </b-container>
+    <div v-else>
+        <router-view></router-view>
+    </div>
     <Foot />
   </div>
 </template>

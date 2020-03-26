@@ -1,0 +1,97 @@
+
+.gallery {
+	display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+	/* Compensate for excess margin on outer gallery flex items */
+	margin: -1rem -1rem;
+}
+
+.gallery-item {
+	/* Minimum width of 24rem and grow to fit available space */
+    flex: 1 0 24rem;
+	/* Margin value should be half of grid-gap value as margins on flex items don't collapse */
+    margin: 1rem;
+    /* height: 100px;
+    width: 100px; */
+    max-width: max-content;
+    /* box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.1); */
+    border: 1px solid #cccccc;
+    overflow: hidden;
+    position: relative;
+}
+
+.gallery-item .actions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+.gallery-item .actions .wrapper {
+    height: 100%;
+    width: 100%;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    position: relative;
+}
+
+.gallery-item .actions .wrapper .btns {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.gallery-item .actions .wrapper .button {
+    display: inline-block;
+    margin: 5px 5px;
+}
+
+.gallery-item .actions .wrapper .button * {
+    display: inline-block;
+    margin: 0 1px;
+}
+
+.gallery-item:hover .actions {
+    display: block;
+    transition: all 320ms;
+}
+
+
+.gallery-image {
+    width: inherit;
+    height: 200px;
+	display: block;
+	object-fit: cover;
+	transition: transform 400ms ease-out;
+}
+
+.gallery-image:hover {
+	transform: scale(1.15);
+}
+
+/*
+
+The following rule will only run if your browser supports CSS grid.
+
+Remove or comment-out the code block below to see how the browser will fall-back to flexbox styling. 
+
+*/
+
+/* @supports (display: grid) {
+	.gallery {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+		grid-gap: 2rem;
+	}
+
+	.gallery,
+	.gallery-item {
+		margin: 0;
+	}
+} */

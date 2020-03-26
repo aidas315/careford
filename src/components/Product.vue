@@ -6,7 +6,7 @@
                     @<router-link :to="{name: 'category', params: {id: product.category}}">{{ getCategoryById(product.category) }}</router-link>
                 </h6>
             </b-card-sub-title>
-            <b-card-text>{{ cleanIt(product.description).slice(0, 100) }}</b-card-text>
+            <b-card-text>{{ cleanIt(product.description).slice(0, 75) }}</b-card-text>
             <router-link class="form-control btn btn-primary" :to="{name: 'product', params: {id: product.id}}">Details</router-link>
         </b-card>
     </div>
@@ -37,8 +37,19 @@ export default {
             return a ? a.title : 'Uncategorized'
         },
         cleanIt(strInputCode) {
-            return strInputCode.replace(/<\/?[^>]+(>|$)/g, "")
+            if (strInputCode) {
+                return strInputCode.replace(/<\/?[^>]+(>|$)/g, "")
+            } else {
+                return ""
+            }
         }
     }
 }
 </script>
+
+<style>
+.card-img-top {
+    height: 200px;
+    width: auto;
+}
+</style>

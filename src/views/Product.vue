@@ -9,9 +9,9 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col cols="6">
+        <b-col lg="6" sm="12" style="margin-bottom: 20px">
           <b-carousel v-if="product.images"
-            id="carousel-1"
+            id="carousel-product-image"
             v-model="slide"
             :interval="4000"
             controls
@@ -26,7 +26,7 @@
               <div v-for="(image, index) in product.images.split(',')" :key="index">
                 <div v-if="image">
                   <b-carousel-slide
-                    
+
                     :img-src="image"
                   >
                     <!-- <div v-if="authenticated">
@@ -36,8 +36,8 @@
                     <div class="wrapper">
                         <div class="btns">
                             <a class="button is-rounded" :href="image" target="_blank"><i class="fas fa-eye"></i> View</a>
-                            
-                        </div>    
+
+                        </div>
                     </div>
                 </div>
                   </b-carousel-slide>
@@ -46,9 +46,9 @@
             </div>
             <div v-else>
               <b-carousel-slide
-                
-                
-                
+
+
+
                 :img-src="product.images"
               >
                 <!-- <div v-if="authenticated">
@@ -58,8 +58,8 @@
                     <div class="wrapper">
                         <div class="btns">
                             <a class="button is-rounded" :href="product.images" target="_blank"><i class="fas fa-eye"></i> View</a>
-                            
-                        </div>    
+
+                        </div>
                     </div>
                 </div>
               </b-carousel-slide>
@@ -67,8 +67,9 @@
           </b-carousel>
           <!-- <br><br><br> -->
         </b-col>
-        <b-col cols="6">
+        <b-col md="6" sm="12">
           <b-container>
+            <div ></div>
             <p><b>Details</b></p>
             <div v-html="product.description"></div>
           </b-container>
@@ -120,7 +121,7 @@
       categories() {
         return this.$store.getters.categories
       },
-      
+
     },
   }
 </script>

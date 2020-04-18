@@ -15,13 +15,13 @@
                 </p>
             </b-col>
         </b-row>
-        
+
         <hr v-if="category_results && category_results.length && product_results && product_results.length">
         <br>
         <div v-if="product_results && product_results.length">
             <h3>Results in Products</h3>
             <b-row class="mt-4 mb-4">
-                <b-col cols="4" v-for="(product, index) in product_results" :key="index">
+                <b-col lg="4" md="6" sm="12" v-for="(product, index) in product_results" :key="index">
                     <Product :product="product" />
                 </b-col>
             </b-row>

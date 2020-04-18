@@ -2,13 +2,13 @@
     <div>
         <vue-headful :title="pageTitle()" :description="pageDescription()"></vue-headful>
         <div v-if="category.images" class="image-bg" :style="`background-image: url('${category.images}')`"></div>
-        
+
         <b-container class="mt-4 mb-4" v-if="category">
             <b-row v-if="category.children && category.children.length">
                 <b-col cols="12">
                     <h3>Categories in @{{ category.title }}</h3>
                     <p v-if="category.children.includes(',')">
-                        
+
                             <b-badge variant="light" v-for="(subcat, index) in category.children.split(',')" :key="index">
                                 <router-link :to="{name: 'category', params: {id: subcat}}">
                                     {{ getCategoryById(subcat) }}
@@ -24,18 +24,18 @@
                     </p>
                 </b-col>
             </b-row>
-            
+
             <hr v-if="category.children && category.children.length && products && products.length">
             <br>
 
             <div v-if="products && products.length">
                 <h3>Products in @{{ category.title }}</h3>
                 <b-row class="mt-4 mb-4">
-                    <b-col cols="4" v-for="(product, index) in products.slice(0, 9)" :key="index">
+                    <b-col lg="4" md="6" sm="12" v-for="(product, index) in products.slice(0, 9)" :key="index">
                         <Product :product="product" />
                     </b-col>
                 </b-row>
-            </div>   
+            </div>
 
             <div v-if="!products.length > 0 && !category.children">
                 <h3>Sorry, Nothing was found in {{ category.title }}!</h3>
@@ -80,8 +80,8 @@ export default {
     // beforeMount() {
     //     this.setTitle()
     // },
-    
-    
+
+
 }
 </script>
 

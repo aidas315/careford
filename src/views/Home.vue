@@ -1,7 +1,7 @@
 <template>
     <div>
         <vue-headful :title="pageTitle()" :description="pageDescription()"></vue-headful>
-        
+
         <div>
             <Carousel />
             <br><br>
@@ -14,12 +14,12 @@
                         </router-link>
                     </b-badge>
                 </p> -->
-                
+
                 <b-row class="mt-4 mb-4 categories">
-                    <b-col cols="3" v-for="(subcat, index) in categories.slice(0, 4)" :key="index">
+                    <b-col lg="3" md="4" sm="12" v-for="(subcat, index) in categories.slice(0, 4)" :key="index">
                         <b-card :img-src="subcat.images" :img-alt="subcat.title" img-top>
                             <b-card-text style="text-align: center">
-                                
+
                                 <router-link :to="{name: 'category', params: {id: subcat.id}}">
                                     <b-card-sub-title>
                                         {{ subcat.title }}
@@ -34,7 +34,7 @@
             <b-container v-if="featured_products && featured_products.length > 0" :style="$store.getters.banners.length == 0 ? 'margin-top: 50px' : ''">
                 <h3>Featured Products</h3>
                 <b-row class="mt-4 mb-4">
-                    <b-col cols="4" v-for="(product, index) in featured_products.slice(0, 9)" :key="index">
+                    <b-col lg="4" md="6" sm="12" v-for="(product, index) in featured_products.slice(0, 9)" :key="index">
                         <Product :product="product" />
                     </b-col>
                 </b-row>
@@ -43,13 +43,13 @@
             <b-container v-if="products && products.length > 0" :style="$store.getters.banners.length == 0 ? 'margin-top: 50px' : ''">
                 <h3>Latest Products</h3>
                 <b-row class="mt-4 mb-4">
-                    <b-col cols="4" v-for="(product, index) in products.slice(0, 9)" :key="index">
+                    <b-col lg="4" md="6" sm="12" v-for="(product, index) in products.slice(0, 9)" :key="index">
                         <Product :product="product" />
                     </b-col>
                 </b-row>
             </b-container>
         </div>
-        
+
     </div>
 </template>
 

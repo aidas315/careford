@@ -10,23 +10,23 @@
       background="#ababab"
       style="text-shadow: 1px 1px 2px #333; text-align: left"
       @sliding-start="onSlideStart"
-      @sliding-end="onSlideEnd" 
+      @sliding-end="onSlideEnd"
       v-if="banners"
     >
       <div v-for="(banner, index) in banners" :key="index">
-        
-            <b-carousel-slide 
-                
-                
-                
+
+            <b-carousel-slide
+
+
+
                 :img-src="banner.image"
-                
+
             >
             </b-carousel-slide>
-            
-        
+
+
       </div>
-    </b-carousel> 
+    </b-carousel>
   </div>
 </template>
 
@@ -44,7 +44,7 @@
       }
     },
     methods: {
-      onSlideStart(slide) {   
+      onSlideStart(slide) {
         this.sliding = true
       },
       onSlideEnd(slide) {
@@ -59,9 +59,19 @@
 </script>
 
 <style>
-#carousel-0 
+#carousel-0
 .img-fluid.w-100 {
     height: 100vh;
     width: max-content !important;
+}
+@media only screen and (max-width: 1024px) {
+    .img-fluid.w-100 {
+        height: 60vh !important;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .img-fluid.w-100 {
+        height: 40vh !important;
+    }
 }
 </style>

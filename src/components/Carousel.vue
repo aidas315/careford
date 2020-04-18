@@ -65,12 +65,12 @@
     width: max-content !important;
 }
 @media only screen and (max-width: 1024px) {
-    .img-fluid.w-100 {
+    .img-fluid.w-100:not(#carousel-product-image) {
         height: 60vh !important;
     }
 }
 @media only screen and (max-width: 600px) {
-    .img-fluid.w-100 {
+    .img-fluid.w-100:not(#carousel-product-image) {
         height: 40vh !important;
     }
 }

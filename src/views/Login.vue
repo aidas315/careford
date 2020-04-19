@@ -48,11 +48,16 @@ export default {
         onSubmit() {
             this.$store.dispatch('login', {
                 email: this.email,
-                password: this.password                
-            }).catch(error => {
-                this.error = error.message
+                password: this.password
             })
-            
+                .then(_ => {
+                    if (this.user) {
+                        this.$router.push({ name: 'admin' })
+                    }
+                }).catch(error => {
+                    this.error = error.message
+                })
+
         },
         pageTitle() {
             return "Admin Login" + this.$root.pageTitle()

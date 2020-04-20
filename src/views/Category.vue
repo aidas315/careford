@@ -31,7 +31,7 @@
             <div v-if="products && products.length">
                 <h3>Products in @{{ category.title }}</h3>
                 <b-row class="mt-4 mb-4">
-                    <b-col lg="4" md="6" sm="12" v-for="(product, index) in products.slice(0, 9)" :key="index">
+                    <b-col lg="4" md="6" sm="12" v-for="(product, index) in products" :key="index">
                         <Product :product="product" />
                     </b-col>
                 </b-row>

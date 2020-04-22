@@ -34,7 +34,7 @@
                                     <option selected :value="null">None</option>
                                     <option v-for="(cate, index) in categories" :key="index" :value="cate.id">{{ cate.title }}</option>
                                 </select>
-                            </b-form-group> 
+                            </b-form-group>
                         <b-form-group label="Category Image" label-for="image-input">
                                 <b-form-file id="image-input"
                                     v-model="images"
@@ -69,7 +69,7 @@
                                             <div class="btns">
                                                 <a class="button is-rounded" :href="readImgAsDataURL(images)" target="_blank"><i class="fas fa-eye"></i> View</a>
                                                 <a class="button is-rounded" @click="deleteImage()"><i class="fas fa-trash"></i> Delete</a>
-                                            </div>    
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
                                                 <div class="btns">
                                                     <a class="button is-rounded" :href="old_images" target="_blank"><i class="fas fa-eye"></i> View</a>
                                                     <!-- <a class="button is-rounded" @click="deleteImageFromArray(key)"><i class="fas fa-trash"></i> Delete</a> -->
-                                                </div>    
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -100,7 +100,7 @@
                                                 <div class="btns">
                                                     <a class="button is-rounded" :href="image" target="_blank"><i class="fas fa-eye"></i> View</a>
                                                     <a class="button is-rounded" @click="deleteImageFromArray(key)"><i class="fas fa-trash"></i> Delete</a>
-                                                </div>    
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -111,7 +111,7 @@
                 </b-card>
             </b-col>
         </b-row>
-        
+
     </b-container>
 </template>
 
@@ -142,15 +142,17 @@ export default {
         category() {
             if (this.$route.params.id) {
                 return this.$store.getters.category(this.$route.params.id)
-            }   
+            }
             return null
         }
     },
     methods: {
-        handleForm() {  
+        handleForm() {
+            let arrOfImgs = []
+            arrOfImgs.push(this.images)
             let data = {
                 title: this.title,
-                images: this.images
+                images: arrOfImgs
             }
             if (this.parent || this.form_type == 'edit') {
                 data = {
@@ -173,7 +175,7 @@ export default {
                     this.$router.push({ name: 'view_categories' })
                 })
             }
-            
+
         },
         readImgAsDataURL: function(file) {
             return URL.createObjectURL(file)
@@ -184,7 +186,7 @@ export default {
             let w = window.open("");
             w.document.write(image.outerHTML);
         },
-        deleteImage() {           
+        deleteImage() {
             this.images = null
         },
         deleteImageFromDatabase(id) {

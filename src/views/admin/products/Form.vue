@@ -32,10 +32,10 @@
                             >
                                 <!--<b-form-select id="category-input" v-model="parent" :options="categories"></b-form-select>-->
                                 <select class="form-control" name="asad" id="category-input" v-model="category">
-                                    
+
                                     <option v-for="(cate, index) in categories" :key="index" :value="cate.id">{{ cate.title }}</option>
                                 </select>
-                            </b-form-group> 
+                            </b-form-group>
                             <b-form-group label="Product Image" label-for="image-input">
                                 <b-form-file id="image-input"
                                     v-model="images"
@@ -47,17 +47,17 @@
                                     ></b-form-file>
                                     <span v-if="form_type == 'edit'">Adds new Images and doesn't delete previous ones.</span>
                             </b-form-group>
-                        <b-form-group label="Description" label-for="description-input"> 
+                            <b-form-group label="Description" label-for="description-input">
                                 <!--<ckeditor :editor="editor" v-model="description" style="min-height: 900px"></ckeditor>-->
                                 <b-form-textarea
-                                    id="textarea"
-                                    v-model="description"
-                                    placeholder="Enter something..."
-                                    rows="3"
-                                    max-rows="6"
-                                    ></b-form-textarea>
+                                        id="textarea"
+                                        v-model="description"
+                                        placeholder="Enter something..."
+                                        rows="3"
+                                        max-rows="6"
+                                ></b-form-textarea>
                             </b-form-group>
-                            
+
                             <b-form-checkbox
                                 id="checkbox-1"
                                 v-model="featured"
@@ -93,7 +93,7 @@
                                             <div class="btns">
                                                 <a class="button is-rounded" :href="readImgAsDataURL(image)" target="_blank"><i class="fas fa-eye"></i> View</a>
                                                 <a class="button is-rounded" @click="deleteImageFromArray(key)"><i class="fas fa-trash"></i> Delete</a>
-                                            </div>    
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
                                             <div class="wrapper">
                                                 <div class="btns">
                                                     <a class="button is-rounded" :href="old_images" target="_blank"><i class="fas fa-eye"></i> View</a>
-                                                </div>    
+                                                </div>
                                             </div>
                                         </div>
                                     </div> -->
@@ -123,7 +123,7 @@
                                                 <div class="btns">
                                                     <a class="button is-rounded" :href="image" target="_blank"><i class="fas fa-eye"></i> View</a>
                                                     <a class="button is-rounded" style="cursor: pointer" @click="deleteImageFromDatabase({image, key})"><i class="fas fa-trash"></i> Delete</a>
-                                                </div>    
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -134,7 +134,7 @@
                 </b-card>
             </b-col>
         </b-row>
-        
+
     </b-container>
 </template>
 
@@ -171,12 +171,12 @@ export default {
         product() {
             if (this.$route.params.id) {
                 return this.$store.getters.product(this.$route.params.id)
-            }   
+            }
             return null
         }
     },
     methods: {
-        handleForm() {  
+        handleForm() {
             let data = {
                 title: this.title,
                 images: this.images,
@@ -211,7 +211,7 @@ export default {
             let w = window.open("");
             w.document.write(image.outerHTML);
         },
-        deleteImageFromArray(idx) {           
+        deleteImageFromArray(idx) {
             this.images.splice(idx, 1)
         },
         deleteImageFromDatabase(data) {

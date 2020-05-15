@@ -1,5 +1,7 @@
 import { store } from './vuex'
 const Home = () => import('./views/Home')
+const About = () => import('./views/About')
+const Contact = () => import('./views/Contact')
 const Login = () => import('./views/Login')
 const Search = () => import('./views/Search')
 const Product = () => import('./views/Product')
@@ -30,6 +32,16 @@ export default [
         path: '/',
         name: 'home',
         component: Home
+    },
+    {
+        path: '/about',
+        name: 'about',
+        component: About
+    },
+    {
+        path: '/contact',
+        name: 'contact',
+        component: Contact
     },
     {
         path: '/search',
@@ -105,8 +117,8 @@ export default [
                 path: '',
                 name: 'admin',
                 component: Dashboard
-            }   
+            }
         ]
-    }, 
-    
+    },
+
 ]
